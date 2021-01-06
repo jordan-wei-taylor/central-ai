@@ -301,7 +301,7 @@ Example: Load Boston
                 if var:
                     Kxx = self.K(X, X, *np.exp(self.lparams[:-1]))
                     KxX = self.k(X)
-                    cov = Kxx + KxX @ self.Ki @ self.KxX.T
+                    cov = Kxx + KxX @ self.Ki @ KxX.T
                     var = np.diag(cov)
                     return mu, var
                 return mu                                                                               
