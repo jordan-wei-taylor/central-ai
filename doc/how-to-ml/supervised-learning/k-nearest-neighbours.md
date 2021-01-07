@@ -231,7 +231,7 @@ From the above plots, it seems that both the uniform and weighted cases yield th
 
     RMSE results of the load_boston data over the number of neighbours :`k` and Minkowski distance parameter :math:`p`.
 
-From the above, we can see that as :math:`p` varies, the curves do change with slightly different optimal results with the trend that the RMSE values decrease as :math:`p` increases. Running this code however proves to be slow so lets look at how we can make the code more efficient for our use case. One route may be to simply do the same code in another language i.e. C and see how that provides a speed up. Alternatively, we can consider partitioning the :math:`m` dimensional observation data space into a `k-dimensional trees <https://en.wikipedia.org/wiki/K-d_tree>`. Lets see how the *numpy*, *C*, and *KDTree* implementations costs in terms of time to run.
+From the above, we can see that as :math:`p` varies, the curves do change with slightly different optimal results with the trend that the RMSE values decrease as :math:`p` increases. Running this code however proves to be slow so lets look at how we can make the code more efficient for our use case. One route may be to simply do the same code in another language i.e. C and see how that provides a speed up. Alternatively, we can consider partitioning the :math:`m` dimensional observation data space into a `k-dimensional trees <https://en.wikipedia.org/wiki/K-d_tree>`_. Lets see how the *numpy*, *C*, and *KDTree* implementations costs in terms of time to run.
 
 .. admonition:: Python
     :class: code
