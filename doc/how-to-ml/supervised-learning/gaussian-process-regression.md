@@ -92,8 +92,8 @@ where :math:`m` is a mean function, :math:`\mathbf{x}^{*}` is a new observation 
     .. math::
 
         \begin{align*}
-            \Rightarrow c &= \frac{-1}{k(\mathbf{x}^{*},\mathbf{x}^{*}) + \mathbf{k}(\mathbf{x}^{*},\mathbf{X})\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\mathbf{k}(\mathbf{X},\mathbf{x}^{*})}\\
-            \Rightarrow \mathbf{b} &= \frac{\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\mathbf{k}(\mathbf{X},\mathbf{x}^{*})}{k(\mathbf{x}^{*},\mathbf{x}^{*}) + \mathbf{k}(\mathbf{x}^{*},\mathbf{X})\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\mathbf{k}(\mathbf{X},\mathbf{x}^{*})}
+            \Rightarrow c &= \frac{1}{k(\mathbf{x}^{*},\mathbf{x}^{*}) - \mathbf{k}(\mathbf{x}^{*},\mathbf{X})\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\mathbf{k}(\mathbf{X},\mathbf{x}^{*})}\\
+            \Rightarrow \mathbf{b} &= \frac{-\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\mathbf{k}(\mathbf{X},\mathbf{x}^{*})}{k(\mathbf{x}^{*},\mathbf{x}^{*}) - \mathbf{k}(\mathbf{x}^{*},\mathbf{X})\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\mathbf{k}(\mathbf{X},\mathbf{x}^{*})}
         \end{align*}
 
     Substituting into :math:`\eqref{star}` yields
@@ -101,10 +101,10 @@ where :math:`m` is a mean function, :math:`\mathbf{x}^{*}` is a new observation 
     .. math::
 
         \begin{align*}
-            p(y^{*}|\mathbf{x}^{*},\mathbf{y},\mathbf{X}) &\propto \exp\left(-\frac{1}{2}\frac{1}{k(\mathbf{x}^{*},\mathbf{x}^{*}) + \mathbf{k}(\mathbf{x}^{*},\mathbf{X})\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\mathbf{k}(\mathbf{X},\mathbf{x}^{*})}\left(y^{*} - m(\mathbf{x}^{*}) - \mathbf{k}(\mathbf{x}^{*},\mathbf{X})\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\left(\mathbf{y} - m(\mathbf{X})\right)\right)\right) \\
+            p(y^{*}|\mathbf{x}^{*},\mathbf{y},\mathbf{X}) &\propto \exp\left(-\frac{1}{2}\frac{1}{k(\mathbf{x}^{*},\mathbf{x}^{*}) - \mathbf{k}(\mathbf{x}^{*},\mathbf{X})\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\mathbf{k}(\mathbf{X},\mathbf{x}^{*})}\left(y^{*} - m(\mathbf{x}^{*}) - \mathbf{k}(\mathbf{x}^{*},\mathbf{X})\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\left(\mathbf{y} - m(\mathbf{X})\right)\right)^2\right) \\
             &= \mathcal{N}\left(\mu^{*},\Sigma^{*}\right)\\\\
             \mu^{*} &= \mathbf{k}(\mathbf{x}^{*},\mathbf{X})\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\left(\mathbf{y} - m(\mathbf{X})\right) + m(\mathbf{x}^{*})\\
-            \Sigma^{*} &= k(\mathbf{x}^{*},\mathbf{x}^{*}) + \mathbf{k}(\mathbf{x}^{*},\mathbf{X})\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\mathbf{k}(\mathbf{X},\mathbf{x}^{*})
+            \Sigma^{*} &= k(\mathbf{x}^{*},\mathbf{x}^{*}) - \mathbf{k}(\mathbf{x}^{*},\mathbf{X})\mathbf{K}(\mathbf{X},\mathbf{X})^{-1}\mathbf{k}(\mathbf{X},\mathbf{x}^{*})
         \end{align*}
 
     .. raw:: html
@@ -181,8 +181,9 @@ Example: Load Boston
 
     .. code-block:: python
 
-        from   sklearn.datasets import load_boston
-        from   matplotlib       import pyplot as plt
+        from   sklearn.datasets       import load_boston
+        from   scipy.spatial.distance import cdist
+        from   matplotlib             import pyplot as plt
         import numpy as np
 
         def squared_exponential(X1, X2, l, s2):
@@ -266,7 +267,7 @@ Example: Load Boston
                 
                 const   = n / 2 * np.log(2 * np.pi)
                 
-                # Store each component of the negative loss likelihood
+                # Store each component of the negative log likelihood
                 loss    = self.loss = np.zeros((epochs + 1, 3))
                 
                 for i in range(epochs):
@@ -513,6 +514,9 @@ From the above, we can see that the uncertainty quantification is much more smoo
 
     A periodic kernel would have been the best kernel for this problem.
 
-..
-    .. [1] C.E. Rasmussen and C. K. I. Williams, *Gaussian Process for Machine Learning*, **MIT Press**, 2006, http://www.gaussianprocess.org/gpml/chapters/RW2.pdf
+Further Reading
+***************
+
++  C.E. Rasmussen and C. K. I. Williams, *Gaussian Process for Machine Learning*, **MIT Press**, 2006, `link 1 <http://www.gaussianprocess.org/gpml/chapters/RW2.pdf>`_
++  C. Bishop, *Pattern Recognition and Machine Learning*, 2006, `link 2 <http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf#page=311>`_
 

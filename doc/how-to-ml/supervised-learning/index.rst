@@ -20,3 +20,4 @@ The regression problems assumes that the associated target values of interest ar
    random-forest.md
    bayesian-linear-regression.md
    gaussian-process-regression.md
+   neural-networks.md

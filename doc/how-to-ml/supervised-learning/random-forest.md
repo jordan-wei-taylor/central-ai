@@ -103,7 +103,7 @@ As we will try both a regression and classifcation task lets define a Metrics cl
                 return np.array(ret)
                 
             def confusion_matrix(self, *data, **kwargs):
-                """ Confusion Matrix (Clasification) """
+                """ Confusion Matrix (Classification) """
                 ret = []
                 for (X, Y) in data:
                     hat  = self(X, **kwargs).argmax(axis = 1)
@@ -340,7 +340,7 @@ Combining all we have talked about so far, we implement the Random Forest class.
                 
                 else:
                     # sequential training of Decision Trees
-                    # self.trees = [_train_tree(X[r], y[r], c, *self._params['args']) for r, c in zip(rows, cols)]
+                    self.trees = [_train_tree(X[r], y[r], c, *self._params['args']) for r, c in zip(rows, cols)]
                 return self
             
             def __call__(self, X, prune = np.inf):
@@ -490,7 +490,8 @@ Random Forest Classification
 
     Accuracy of Random Forest on the load_digits dataset varying over max depth.
 
-.. rubric:: References
+Bibliography
+************
 
 .. [1] L. Breiman, *Random Forests*, 2001, https://link.springer.com/article/10.1023/A:1010933404324
 .. [2] T. K. Ho, *Random Decision Forests*, 1995, https://ieeexplore.ieee.org/document/598994
