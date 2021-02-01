@@ -104,6 +104,8 @@ html_style = 'css/custom.css'
 numfig = True
 numfig_secnum_depth = 2
 
+html_favicon = 'favicon.ico'
+
 pngmath_latex_preamble=r'\usepackage[active]{preview}' # + other custom stuff for inline math, such as non-default math fonts etc.
 pngmath_use_preview=True
 

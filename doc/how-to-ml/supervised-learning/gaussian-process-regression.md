@@ -138,7 +138,7 @@ which is also referred to as :math:`\mathcal{GP}(\mathbf{m},\mathbf{K} + \sigma^
     :nowrap:
 
     \begin{align}
-        \log p(\mathbf{y}|\mathbf{X},\theta,\sigma^2) = -\frac{n}{2}\log 2\pi - \frac{1}{2}\log |k(\mathbf{X},\mathbf{X};\theta) + \sigma^2\mathbf{I}| - \frac{1}{2}\left(\mathbf{y} - m(\mathbf{X}\right)^\text{T}\left(k(\mathbf{X},\mathbf{X};\theta) + \sigma^2\mathbf{I}\right)^{-1}\left(\mathbf{y} - m(\mathbf{X})\right) \label{eq:log-likelihood},
+        \log p(\mathbf{y}|\mathbf{X},\theta,\sigma^2) = -\frac{n}{2}\log 2\pi - \frac{1}{2}\log |k(\mathbf{X},\mathbf{X};\theta) + \sigma^2\mathbf{I}| - \frac{1}{2}\left(\mathbf{y} - m(\mathbf{X})\right)^\text{T}\left(k(\mathbf{X},\mathbf{X};\theta) + \sigma^2\mathbf{I}\right)^{-1}\left(\mathbf{y} - m(\mathbf{X})\right) \label{eq:log-likelihood},
     \end{align}
 
 where we introduce :math:`\theta` to be the parameters of the covariance kernel. Examining the three terms from left to right, we have the normalisation constant which can be ignored from an optimisation point of view, the log determinant which measures **model complexity**, and finally the quadratic term which measures **data fit**. The GP naturally has this in-built regularisation term which penalises the model if it gets to complicated (which reduces the chance of our model overfitting). If :math:`\theta` is constrained to positive values (such as the squared exponential kernel and many other kernels) then we need to ensure it never becomes negative. One simple trick to do that is to optimise the parameters in **log** space as when we exponentiate our logarithmic values we are strictly positive.
